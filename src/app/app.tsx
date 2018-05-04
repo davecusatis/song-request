@@ -25,7 +25,7 @@ export class App {
       console.log('authed');
     });
 
-    window.Twitch.ext.onContext((context: Context) => {
+    window.Twitch.ext.onContext((context: any) => {
       console.log('got context', context);
     });
 

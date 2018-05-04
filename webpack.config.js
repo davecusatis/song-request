@@ -20,6 +20,9 @@ module.exports = {
       },
     ]
   },
+  externals: {
+    'twitch-ext-helper': 'Twitch.ext',
+  },
 
   devServer: {
     contentBase: path.join(__dirname, "public"),

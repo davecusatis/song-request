@@ -1,5 +1,6 @@
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Switch, Redirect} from 'react-router-dom';
 import * as React from 'react';
+import { renderRoutes } from '../routes';
 
 interface State {}
 export interface PublicProps {}
@@ -12,7 +13,10 @@ export class RootComponent extends React.Component<Props, State> {
   public render() {
     return (
       <div>
-        Hello, World
+        <Switch>
+          {renderRoutes()}
+          <Redirect from='/' to='component' />
+        </Switch>
       </div>
     );
   }

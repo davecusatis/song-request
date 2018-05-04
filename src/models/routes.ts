@@ -1,4 +1,5 @@
 export interface RouteEntry {
+  index: number;
   title: string;
   path: string;
   exact?: boolean;
