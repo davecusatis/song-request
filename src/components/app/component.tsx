@@ -1,16 +1,17 @@
 import * as React from "react";
 
 
-export interface PollProps { }
+export interface AppProps { }
 
-export class Poll extends React.Component<PollProps, {}> {
+export class App extends React.Component<AppProps, {}> {
   componentDidMount() {
+    // load songlist
   }
 
   render() {
       return (
         <div>
-          webpack sux 
+          
         </div>
       );
   }
