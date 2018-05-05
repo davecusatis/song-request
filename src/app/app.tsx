@@ -1,8 +1,13 @@
 import { Config } from './config';
 import { Store } from './store';
+import * as sessionActions from '../actions/session';
+import * as playlistActions from '../actions/playlist';
+import * as contextActions from '../actions/context';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Session } from '../models/session';
+import { Context } from '../models/context';
 
 export let app: App;
 export let config: typeof app.config;
@@ -21,16 +26,31 @@ export class App {
     this.config = configuration;
     this.store = new Store(this.config);
 
-    window.Twitch.ext.onAuthorized(() => {
-      console.log('authed');
+    window.Twitch.ext.onAuthorized((auth: Session) => {
+      console.log('auth', auth);
+      this.store.dispatch(sessionActions.onAuthorized(auth));
     });
 
     window.Twitch.ext.onContext((context: any) => {
+      this.store.dispatch(contextActions.onContext(context));
       console.log('got context', context);
     });
 
     window.Twitch.ext.onError((error: string | Error) => {
 
+    });
+
+    window.Twitch.ext.listen('broadcast', (cmd: any) =>{
+      switch(cmd) {
+        case 'playlistUpdated':
+          this.store.dispatch(playlistActions.playlistUpdated(cmd));
+          break;
+        case 'songlistUpdated':
+          // this.store.dispatch(playlistActions.songlistUpdated(cmd));
+          break;
+        default:
+          break;
+      }
     });
   }
 

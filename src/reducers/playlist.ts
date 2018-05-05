@@ -24,7 +24,7 @@ export function playlistReducer(state = getInitialState(), action: playlistActio
   }
 }
 
-export function getPlaylist(state: GlobalState){
+export function getPlaylist(state: GlobalState): PlaylistState {
   return state.playlist;
 }
 

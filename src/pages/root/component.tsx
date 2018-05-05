@@ -15,7 +15,6 @@ export class RootComponent extends React.Component<Props, State> {
       <div>
         <Switch>
           {renderRoutes()}
-          <Redirect from='/' to='component' />
         </Switch>
       </div>
     );

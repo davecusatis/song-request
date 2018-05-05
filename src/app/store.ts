@@ -5,6 +5,8 @@ import thunk from 'redux-thunk';
 import { Action, AsyncAction } from '../models/actions';
 import { GlobalState } from '../models/global-state';
 import { playlistReducer } from '../reducers/playlist';
+import { contextReducer } from '../reducers/context';
+import { sessionReducer } from '../reducers/session';
 
 declare const window: Window;
 
@@ -18,7 +20,9 @@ export class Store{
 
   private initRootReducer(): Reducer{
     return combineReducers({
-      playlistReducer
+      playlistReducer,
+      contextReducer,
+      sessionReducer,
     });
   }
 

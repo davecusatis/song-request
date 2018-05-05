@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { app, initApp } from './app/app';
 import { DevConfig } from './app/config';
 import { Root } from './pages/root';
@@ -15,7 +15,7 @@ window.Twitch = window.Twitch || {};
 initApp(new DevConfig());
 
 app.mount((
-    <BrowserRouter>
+    <MemoryRouter>
         <Root />
-    </BrowserRouter>
+    </MemoryRouter>
 ), document.getElementById('root')!);
