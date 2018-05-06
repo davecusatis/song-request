@@ -24,7 +24,6 @@ export function contextReducer(state = getInitialState(), action: contextActions
   }
 }
 
-export function getContext(state: GlobalState): ContextState {
-  return state.context;
+export function getContext(state: GlobalState): Context {
+  return state.context && state.context.context;
 }
-

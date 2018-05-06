@@ -24,7 +24,7 @@ export function sessionReducer(state = getInitialState(), action: sessionActions
   }
 }
 
-export function getSession(state: GlobalState): SessionState {
-  return state.session;
+export function getSession(state: GlobalState): Session {
+  return state.session && state.session.session;
 }
 

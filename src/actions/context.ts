@@ -13,7 +13,6 @@ export type All = (
 );
 
 export function onContext(context: Context): onContextAction {
-  console.log('context dispatched', context);
   return {
     type: ON_CONTEXT,
     context

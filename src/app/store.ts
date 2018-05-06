@@ -20,9 +20,9 @@ export class Store{
 
   private initRootReducer(): Reducer{
     return combineReducers({
-      playlistReducer,
-      contextReducer,
-      sessionReducer,
+      playlist: playlistReducer,
+      context: contextReducer,
+      session: sessionReducer,
     });
   }
 
