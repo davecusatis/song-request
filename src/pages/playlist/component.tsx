@@ -17,11 +17,13 @@ export interface ReduxStateProps {
 type Props = PublicProps & ReduxStateProps & RouteProps;
 export class PlaylistPageComponent extends React.Component<Props, State> {
   public render() {
-    console.log('rendering', this.props);
+    const { session } = this.props;
+    const channel = session && session.channelId;
+    console.log(channel);
     return (
       <div>
         <Header />
-        {this.props.playlist ? this.renderPlaylist() : this.renderLoading()}
+        {this.props.playlist ? this.renderPlaylist() : this.renderLoading(channel)}
       </div>
     );
   }
@@ -41,11 +43,10 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
     });
   }
 
-  private renderLoading(): JSX.Element{
-    const { context, session } = this.props;
+  private renderLoading(channelId: string): JSX.Element{
     return (
       <div>
-        Loading playlist
+        Loading {channelId} playlist...
       </div>
     );
   }

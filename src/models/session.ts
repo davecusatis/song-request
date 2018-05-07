@@ -1,6 +1,6 @@
 export interface Session {
-  channelID: string;
-  clientID: string;
+  channelId: string;
+  clientId: string;
   token: string;
-  userID: string;
+  userId: string;
 }
