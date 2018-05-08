@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, Switch, Redirect} from 'react-router-dom';
 import { Song } from '../../models/song';
-import { Header } from '../../components/header';
+import { Header, HeaderProps } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 
@@ -16,12 +16,20 @@ export interface ReduxStateProps {
 
 type Props = PublicProps & ReduxStateProps & RouteProps;
 export class PlaylistPageComponent extends React.Component<Props, State> {
+  private nowPlaying(): Song {
+    if (this.props.playlist && (this.props.playlist.length > 0)) {
+      return this.props.playlist[0]
+    }
+    return null
+  }
+
   public render() {
     const { session } = this.props;
     const channel = session && session.channelId;
+
     return (
       <div>
-        <Header />
+        <Header nowPlaying={this.nowPlaying()}/>
         {this.props.playlist ? this.renderPlaylist() : this.renderLoading(channel)}
       </div>
     );

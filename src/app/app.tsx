@@ -43,6 +43,7 @@ export class App {
       message = JSON.parse(message);
       switch(message.type) {
         case 'playlistUpdated':
+          window.Twitch.ext.rig.log('updating playlist with: ', message.data)
           this.store.dispatch(playlistActions.playlistUpdated(message.data));
           break;
         case 'songlistUpdated':
