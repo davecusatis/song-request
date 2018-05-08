@@ -19,7 +19,6 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
   public render() {
     const { session } = this.props;
     const channel = session && session.channelId;
-    console.log(channel);
     return (
       <div>
         <Header />
@@ -36,7 +35,7 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
 
     return playlist.map((song: Song, index: number): JSX.Element => {
       return(
-        <div>
+        <div key={index}>
           {song.title} - {song.artist}, {song.genre}, {song.game}
         </div>
       );

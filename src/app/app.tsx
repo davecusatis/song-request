@@ -27,23 +27,23 @@ export class App {
     this.store = new Store(this.config);
 
     window.Twitch.ext.onAuthorized((auth: Session) => {
-      console.log('auth', auth);
       this.store.dispatch(sessionActions.onAuthorized(auth));
+      this.store.dispatch(playlistActions.updatePlaylist(auth.token));
     });
 
     window.Twitch.ext.onContext((context: any) => {
       this.store.dispatch(contextActions.onContext(context));
-      console.log('got context', context);
     });
 
     window.Twitch.ext.onError((error: string | Error) => {
 
     });
 
-    window.Twitch.ext.listen('broadcast', (cmd: any) =>{
-      switch(cmd) {
+    window.Twitch.ext.listen('broadcast', (target: any, contentType: any, message: any) =>{
+      message = JSON.parse(message);
+      switch(message.type) {
         case 'playlistUpdated':
-          this.store.dispatch(playlistActions.playlistUpdated(cmd));
+          this.store.dispatch(playlistActions.playlistUpdated(message.data));
           break;
         case 'songlistUpdated':
           // this.store.dispatch(playlistActions.songlistUpdated(cmd));
