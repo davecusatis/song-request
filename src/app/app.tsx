@@ -50,6 +50,7 @@ export class App {
           this.store.dispatch(playlistActions.playlistUpdated(message.data.playlist));
           break;
         case 'songlistUpdated':
+        window.Twitch.ext.rig.log('updating songlist with: ', message.data);
           this.store.dispatch(songlistActions.songlistUpdated(message.data.songlist));
           break;
         default:

@@ -37,8 +37,8 @@ export class SearchPageComponent extends React.Component<Props, State> {
 
     return songlist.map((song: Song, index: number): JSX.Element => {
       return(
-        <div>
-          <div key={index}>
+        <div key={index}>
+          <div>
             {song.title} - {song.artist}, {song.genre}, {song.game}
           </div>
           <div> Add </div>
