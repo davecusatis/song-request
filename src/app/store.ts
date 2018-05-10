@@ -7,6 +7,7 @@ import { GlobalState } from '../models/global-state';
 import { playlistReducer } from '../reducers/playlist';
 import { contextReducer } from '../reducers/context';
 import { sessionReducer } from '../reducers/session';
+import { songlistReducer } from '../reducers/songlist';
 
 declare const window: Window;
 
@@ -21,6 +22,7 @@ export class Store{
   private initRootReducer(): Reducer{
     return combineReducers({
       playlist: playlistReducer,
+      songlist: songlistReducer,
       context: contextReducer,
       session: sessionReducer,
     });

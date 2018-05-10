@@ -1,5 +1,6 @@
 import { RouteEntry } from '../models/routes';
 import { PlaylistPage } from '../pages/playlist';
+import { SearchPage } from '../pages/search';
 import * as React from 'react';
 import { Route } from 'react-router';
 
@@ -10,6 +11,20 @@ const routes: RouteEntry[] = [
     path: '/',
     exact: true,
     component: PlaylistPage,
+  },
+  {
+    index: 1,
+    title: 'Playlist',
+    path: '/playlist',
+    exact: true,
+    component: PlaylistPage,
+  },
+  {
+    index: 1,
+    title: 'Songlist',
+    path: '/songlist',
+    exact: true,
+    component: SearchPage,
   },
   {
     index: 1,

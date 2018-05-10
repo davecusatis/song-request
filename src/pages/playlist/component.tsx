@@ -16,20 +16,13 @@ export interface ReduxStateProps {
 
 type Props = PublicProps & ReduxStateProps & RouteProps;
 export class PlaylistPageComponent extends React.Component<Props, State> {
-  private nowPlaying(): Song {
-    if (this.props.playlist && (this.props.playlist.length > 0)) {
-      return this.props.playlist[0]
-    }
-    return null
-  }
-
   public render() {
     const { session } = this.props;
     const channel = session && session.channelId;
 
     return (
       <div>
-        <Header nowPlaying={this.nowPlaying()}/>
+        <Header playlist={this.props.playlist}/>
         {this.props.playlist ? this.renderPlaylist() : this.renderLoading(channel)}
       </div>
     );
@@ -43,8 +36,10 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
 
     return playlist.map((song: Song, index: number): JSX.Element => {
       return(
-        <div key={index}>
-          {song.title} - {song.artist}, {song.genre}, {song.game}
+        <div>
+          <div key={index}>
+            {song.title} - {song.artist}, {song.genre}, {song.game}
+          </div>
         </div>
       );
     });

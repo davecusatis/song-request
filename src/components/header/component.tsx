@@ -1,27 +1,43 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
 
 export interface HeaderProps {
-  nowPlaying?: Song;
+  playlist?: Song[];
 }
 
-export class Header extends React.Component<HeaderProps>{
+export interface HeaderState {
+  playlist?: Song[];
+  nowPlaying: Song;
+}
+export class Header extends React.Component<HeaderProps, HeaderState>{
   constructor(props: HeaderProps) {
     super(props);
     this.state = {
-      nowPlaying: this.props.nowPlaying,
+      playlist: this.props.playlist,
+      nowPlaying: this.nowPlaying(),
     };
+  }
+  private nowPlaying(): Song {
+    if (this.props.playlist && (this.props.playlist.length > 0)) {
+      return this.props.playlist[0]
+    }
+    return null
   }
 
   public render() {
     return (
       <div>
         Song Request
-        {this.props.nowPlaying &&
+        {this.state.nowPlaying &&
           <div>
-            Now playing: {this.props.nowPlaying.title}
+            Now playing: {this.state.nowPlaying.title}
+          </div>}
+
+          <div>
+            <Link to="/playlist"> Playlist </Link>
+            <Link to="/songlist"> Songlist </Link>
           </div>
-        }
       </div>
     );
   }

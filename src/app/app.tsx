@@ -3,6 +3,7 @@ import { Store } from './store';
 import * as sessionActions from '../actions/session';
 import * as playlistActions from '../actions/playlist';
 import * as contextActions from '../actions/context';
+import * as songlistActions from '../actions/songlist';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -29,6 +30,7 @@ export class App {
     window.Twitch.ext.onAuthorized((auth: Session) => {
       this.store.dispatch(sessionActions.onAuthorized(auth));
       this.store.dispatch(playlistActions.updatePlaylist(auth.token));
+      this.store.dispatch(songlistActions.updateSonglist(auth.token));
     });
 
     window.Twitch.ext.onContext((context: any) => {
@@ -41,13 +43,14 @@ export class App {
 
     window.Twitch.ext.listen('broadcast', (target: any, contentType: any, message: any) =>{
       message = JSON.parse(message);
+      console.log(message);
       switch(message.type) {
         case 'playlistUpdated':
-          window.Twitch.ext.rig.log('updating playlist with: ', message.data)
-          this.store.dispatch(playlistActions.playlistUpdated(message.data));
+          window.Twitch.ext.rig.log('updating playlist with: ', message.data);
+          this.store.dispatch(playlistActions.playlistUpdated(message.data.playlist));
           break;
         case 'songlistUpdated':
-          // this.store.dispatch(playlistActions.songlistUpdated(cmd));
+          this.store.dispatch(songlistActions.songlistUpdated(message.data.songlist));
           break;
         default:
           break;

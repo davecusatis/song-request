@@ -13,6 +13,7 @@ interface UpdatePlaylist extends Action<typeof UPDATE_PLAYLIST> {}
 
 export type All = (
   | PlaylistUpdated
+  | UpdatePlaylist
 );
 
 export function playlistUpdated(playlist: Song[]): PlaylistUpdated {
@@ -24,7 +25,7 @@ export function playlistUpdated(playlist: Song[]): PlaylistUpdated {
 
 export function updatePlaylist(jwt: string): UpdatePlaylist {
   const api = new PlaylistAPI();
-  api.ping(jwt);
+  api.getPlaylist(jwt);
   return {
     type: UPDATE_PLAYLIST
   }
