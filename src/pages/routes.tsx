@@ -1,6 +1,8 @@
 import { RouteEntry } from '../models/routes';
 import { PlaylistPage } from '../pages/playlist';
 import { SearchPage } from '../pages/search';
+import { DashboardPage } from '../pages/dashboard';
+import { BroadcasterConfigPage } from '../pages/broadcaster';
 import * as React from 'react';
 import { Route } from 'react-router';
 
@@ -20,32 +22,25 @@ const routes: RouteEntry[] = [
     component: PlaylistPage,
   },
   {
-    index: 1,
+    index: 2,
     title: 'Songlist',
     path: '/songlist',
     exact: true,
     component: SearchPage,
   },
   {
-    index: 1,
-    title: 'Playlist Overlay',
-    path: '/video',
+    index: 3,
+    title: 'Broadcaster Config',
+    path: '/config',
     exact: true,
-    component: PlaylistPage,
-  },
-  {
-    index: 2,
-    title: 'Playlist Panel',
-    path: '/panel',
-    exact: true,
-    component: PlaylistPage,
+    component: BroadcasterConfigPage,
   },
   {
     index: 3,
-    title: 'Playlist Component',
-    path: '/component',
+    title: 'Live Config',
+    path: '/dashboard',
     exact: true,
-    component: PlaylistPage,
+    component: DashboardPage,
   }
 ];
 

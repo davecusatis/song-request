@@ -15,12 +15,21 @@ export class Header extends React.Component<HeaderProps, HeaderState>{
     super(props);
     this.state = {
       playlist: this.props.playlist,
-      nowPlaying: this.nowPlaying(),
+      nowPlaying: null,
     };
   }
+
+  public componentWillMount(){
+    if(this.props.playlist && this.props.playlist.length > 0 ){
+      this.setState({
+        nowPlaying: this.nowPlaying(),
+      });
+    }
+  }
+
   private nowPlaying(): Song {
-    if (this.props.playlist && (this.props.playlist.length > 0)) {
-      return this.props.playlist[0]
+    if (this.state.playlist && (this.state.playlist.length > 0)) {
+      return this.state.playlist[0]
     }
     return null
   }

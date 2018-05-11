@@ -5,7 +5,9 @@ import { Header, HeaderProps } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 
-interface State {}
+interface State {
+  playlist: Song[];
+}
 export interface PublicProps {}
 export type RouteProps = RouteComponentProps<{}>;
 export interface ReduxStateProps {
@@ -23,8 +25,18 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
     }
   }
   public render() {
-    const { session, playlist } = this.props;
+    const { session, playlist, context } = this.props;
     const channel = session && session.channelId;
+
+    if(context && context.mode === "config") {
+      console.log(context);
+      return (<Redirect to='/config' />);
+    }
+
+    if(context && context.mode === "dashboard") {
+      console.log(context);
+      return (<Redirect to='/dashboard' />);
+    }
 
     return (
       <div>
