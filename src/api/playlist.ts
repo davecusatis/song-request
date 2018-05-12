@@ -37,4 +37,18 @@ export class PlaylistAPI {
       console.log(reason);
     });
   }
+
+  public postSonglist(jwt: string, songlist: string): Promise<void> {
+    return fetch('http://localhost:3030/api/v0/songlist',{
+      method: 'POST',
+      headers: {
+        'authorization': 'Bearer ' + jwt,
+      },
+      body: songlist,
+    }).then((value: Response) => {
+
+    }).catch((reason: any) => {
+      console.log(reason);
+    });
+  }
 }

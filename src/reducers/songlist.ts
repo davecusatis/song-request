@@ -19,6 +19,12 @@ export function songlistReducer(state = getInitialState(), action: songlistActio
         songlistReceived: true,
         songlist: action.songlist,
       };
+    case songlistAction.SONGLIST_UPDATED:
+      return {
+        ...state,
+        songlistReceived: true,
+        songlist: action.songlist,
+      };
     default:
       return state;
   }

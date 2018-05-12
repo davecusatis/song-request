@@ -4,8 +4,13 @@ import { Song } from '../../models/song';
 import { Header, HeaderProps } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
+import { SonglistInput } from '../../components/songlist-input';
+import { app }  from '../../app/app';
+import * as songlistActions from '../../actions/songlist';
 
-interface State {}
+interface State {
+  songlist: Song[];
+}
 export interface PublicProps {}
 export type RouteProps = RouteComponentProps<{}>;
 export interface ReduxStateProps {
@@ -16,13 +21,29 @@ export interface ReduxStateProps {
 
 type Props = PublicProps & ReduxStateProps & RouteProps;
 export class BroadcasterConfigPageComponent extends React.Component<Props, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      songlist: props.songlist,
+    }
+  }
+
   public render() {
-    const { session } = this.props;
+    const { session, songlist } = this.props;
     const channel = session && session.channelId;
+
+    if (songlist === undefined) {
+      return null;
+    }
 
     return (
       <div>
         Broadcaster Config
+        <SonglistInput
+          songlist={songlist}
+          onSubmit={(songlist: Song[]) => {
+            app.store.dispatch(songlistActions.saveSonglist(session.token, songlist));
+          }} />
       </div>
     );
   }

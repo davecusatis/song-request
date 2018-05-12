@@ -28,12 +28,14 @@ export class App {
     this.store = new Store(this.config);
 
     window.Twitch.ext.onAuthorized((auth: Session) => {
+      window.Twitch.ext.rig.log('auth', auth);
       this.store.dispatch(sessionActions.onAuthorized(auth));
       this.store.dispatch(playlistActions.updatePlaylist(auth.token));
       this.store.dispatch(songlistActions.updateSonglist(auth.token));
     });
-
+ 
     window.Twitch.ext.onContext((context: any) => {
+      window.Twitch.ext.rig.log('context', context);
       this.store.dispatch(contextActions.onContext(context));
     });
 
@@ -46,11 +48,11 @@ export class App {
       console.log(message);
       switch(message.type) {
         case 'playlistUpdated':
-          window.Twitch.ext.rig.log('updating playlist with: ', message.data);
+          // window.Twitch.ext.rig.log('updating playlist with: ', message.data);
           this.store.dispatch(playlistActions.playlistUpdated(message.data.playlist));
           break;
         case 'songlistUpdated':
-        window.Twitch.ext.rig.log('updating songlist with: ', message.data);
+        // window.Twitch.ext.rig.log('updating songlist with: ', message.data);
           this.store.dispatch(songlistActions.songlistUpdated(message.data.songlist));
           break;
         default:
