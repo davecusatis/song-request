@@ -4,6 +4,7 @@ import { Song } from '../../models/song';
 import { Header, HeaderProps } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
+import { Search } from '../../components/search';
 
 interface State {}
 export interface PublicProps {}
@@ -29,22 +30,17 @@ export class SearchPageComponent extends React.Component<Props, State> {
     );
   }
 
-  private renderSonglist(): JSX.Element[]{
+  private renderSonglist(): JSX.Element{
     const { songlist } = this.props;
     if (songlist === undefined) {
       return null;
     }
 
-    return songlist.map((song: Song, index: number): JSX.Element => {
-      return(
-        <div key={index}>
-          <div>
-            {song.title} - {song.artist}, {song.genre}, {song.game}
-          </div>
-          <div> Add </div>
-        </div>
-      );
-    });
+    return (
+      <Search
+        addSong={(song: Song)=> {}}
+        songlist={this.props.songlist}/>
+    );
   }
 
   private renderLoading(channelId: string): JSX.Element{

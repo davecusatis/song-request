@@ -34,10 +34,11 @@ export class SonglistInput extends React.Component<SonglistInputProps, SonglistI
     songs.map((song: string, index: number) => {
       if (song) {
         let attrs = song.split(',');
-
+        let title = attrs[0].trim();
+        let artist = attrs[1].trim();
         songlist.push({
-          title: attrs[0].trim(),
-          artist: attrs[1].trim(),
+          title: title,
+          artist: artist,
         })
       }
     });
