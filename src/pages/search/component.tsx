@@ -6,7 +6,9 @@ import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 import { Search } from '../../components/search';
 
-interface State {}
+interface State {
+  songlist?: Song[];
+}
 export interface PublicProps {}
 export type RouteProps = RouteComponentProps<{}>;
 export interface ReduxStateProps {
@@ -18,6 +20,12 @@ export interface ReduxStateProps {
 
 type Props = PublicProps & ReduxStateProps & RouteProps;
 export class SearchPageComponent extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      songlist: this.props.songlist,
+    }
+  }
   public render() {
     const { session } = this.props;
     const channel = session && session.channelId;
@@ -25,7 +33,7 @@ export class SearchPageComponent extends React.Component<Props, State> {
     return (
       <div>
         <Header playlist={this.props.playlist}/>
-        {this.props.playlist ? this.renderSonglist() : this.renderLoading(channel)}
+        {this.state.songlist ? this.renderSonglist() : this.renderLoading(channel)}
       </div>
     );
   }
@@ -38,8 +46,7 @@ export class SearchPageComponent extends React.Component<Props, State> {
 
     return (
       <Search
-        addSong={(song: Song)=> {}}
-        songlist={this.props.songlist}/>
+        addSong={(song: Song)=> {}}/>
     );
   }
 

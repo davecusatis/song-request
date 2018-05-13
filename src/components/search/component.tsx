@@ -1,21 +1,23 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { Song } from '../../models/song';
 
-export interface SearchProps {
-  addSong(song: Song): void;
-  songlist?: Song[];
-}
-
-export interface SearchState {
-  filteredSonglist: Song[];
+interface State {
   searchText: string;
 }
 
-export class Search extends React.Component<SearchProps, SearchState> {
-  constructor(props: SearchProps){
+export interface PublicProps {
+  addSong(song: Song): void;
+}
+export interface ReduxStateProps {
+  songlist?: Song[];
+}
+
+type Props = PublicProps & ReduxStateProps;
+export class SearchComponent extends React.Component<Props, State> {
+  constructor(props: Props){
     super(props);
     this.state = {
-      filteredSonglist: this.props.songlist,
       searchText: '',
     }
   }
@@ -33,12 +35,11 @@ export class Search extends React.Component<SearchProps, SearchState> {
     return song.title.toLowerCase().includes(this.state.searchText.toLowerCase())
     || song.artist.toLowerCase().includes(this.state.searchText.toLowerCase());
   }
-  
+
 
   public render() {
-    const songlist = this.state.filteredSonglist.filter((song: Song, index: number): boolean => this.filter(song));
+    const songlist = this.props.songlist.filter((song: Song, index: number): boolean => this.filter(song));
 
-    console.log(this.state.searchText);
     return (
       <div>
         Search

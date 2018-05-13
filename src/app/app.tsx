@@ -45,7 +45,6 @@ export class App {
 
     window.Twitch.ext.listen('broadcast', (target: any, contentType: any, message: any) =>{
       message = JSON.parse(message);
-      console.log(message);
       switch(message.type) {
         case 'playlistUpdated':
           // window.Twitch.ext.rig.log('updating playlist with: ', message.data);
