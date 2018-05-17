@@ -8,8 +8,6 @@ import { withRouter } from 'react-router';
 
 function mapStateToProps(state: GlobalState): ReduxStateProps {
     return {
-      playlist: getPlaylist(state),
-      context: getContext(state),
       session: getSession(state)
     };
 }

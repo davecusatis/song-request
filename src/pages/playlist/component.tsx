@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { RouteComponentProps, Switch, Redirect} from 'react-router-dom';
 import { Song } from '../../models/song';
-import { Header, HeaderProps } from '../../components/header';
+import { Header } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
+import { Playlist } from '../../components/playlist';
 
 interface State {
   playlist: Song[];
@@ -40,31 +41,10 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
 
     return (
       <div>
-        <Header playlist={playlist}/>
-        {playlist ? this.renderPlaylist() : this.renderLoading(channel)}
-      </div>
-    );
-  }
-
-  private renderPlaylist(): JSX.Element[]{
-    const { playlist } = this.props;
-    if (playlist === undefined) {
-      return null;
-    }
-
-    return playlist.map((song: Song, index: number): JSX.Element => {
-      return(
-        <div key={index}>
-          {song.title} - {song.artist}, {song.genre}, {song.game}
-        </div>
-      );
-    });
-  }
-
-  private renderLoading(channelId: string): JSX.Element{
-    return (
-      <div>
-        Loading {channelId} playlist...
+        <Header/>
+        <Playlist
+          editable={false}
+          channel={channel}/>
       </div>
     );
   }

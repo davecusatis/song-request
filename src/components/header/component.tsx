@@ -2,52 +2,47 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
 
-export interface HeaderProps {
-  playlist?: Song[];
-}
-
+export interface PublicProps {}
 export interface HeaderState {
-  playlist?: Song[];
   nowPlaying: Song;
 }
-export class Header extends React.Component<HeaderProps, HeaderState>{
-  constructor(props: HeaderProps) {
+
+export interface ReduxStateProps {
+  playlist?: Song[];
+}
+
+type Props = ReduxStateProps & PublicProps;
+
+export class HeaderComponent extends React.Component<Props, HeaderState>{
+  constructor(props: PublicProps) {
     super(props);
     this.state = {
-      playlist: this.props.playlist,
       nowPlaying: null,
     };
-  }
-
-  public componentWillMount(){
-    if(this.props.playlist && this.props.playlist.length > 0 ){
-      this.setState({
-        nowPlaying: this.nowPlaying(),
-      });
-    }
-  }
-
-  private nowPlaying(): Song {
-    if (this.state.playlist && (this.state.playlist.length > 0)) {
-      return this.state.playlist[0]
-    }
-    return null
   }
 
   public render() {
     return (
       <div>
         Song Request
-        {this.state.nowPlaying &&
-          <div>
-            Now playing: {this.state.nowPlaying.title}
-          </div>}
-
+        {this.renderNowPlaying()}
           <div>
             <Link to="/playlist"> Playlist </Link>
             <Link to="/songlist"> Songlist </Link>
           </div>
       </div>
     );
+  }
+
+  private renderNowPlaying(): JSX.Element{
+    const { playlist } = this.props;
+    if(playlist && playlist.length > 0){
+      return (
+        <div>
+          Now playing: {playlist[0].title}
+        </div>
+      );
+    }
+    return null;
   }
 }

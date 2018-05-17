@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, Switch, Redirect} from 'react-router-dom';
 import { Song } from '../../models/song';
-import { Header, HeaderProps } from '../../components/header';
+import { Header } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 import { SonglistInput } from '../../components/songlist-input';

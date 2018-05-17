@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, Switch, Redirect} from 'react-router-dom';
 import { Song } from '../../models/song';
-import { Header, HeaderProps } from '../../components/header';
+import { Header } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 import { Search } from '../../components/search';
@@ -32,7 +32,7 @@ export class SearchPageComponent extends React.Component<Props, State> {
 
     return (
       <div>
-        <Header playlist={this.props.playlist}/>
+        <Header/>
         {this.state.songlist ? this.renderSonglist() : this.renderLoading(channel)}
       </div>
     );
