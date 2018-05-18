@@ -29,12 +29,19 @@ export class DashboardPageComponent extends React.Component<Props, State> {
         </div>
         <Playlist
           editable={true}
-          channel={channel}/>
+          channel={channel}
+          deleteSong={(song: Song) => this.deleteSong(song)}/>
       </div>
     );
   }
 
   private skipSong(token: string){
     app.store.dispatch(playlistActions.skipSong(token));
+  }
+
+  private deleteSong(song: Song){
+    console.log('deleting song', song);
+    const { session } = this.props;
+    app.store.dispatch(playlistActions.deleteSong(session.token, song));
   }
 }

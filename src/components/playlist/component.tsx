@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Song } from '../../models/song';
+import { app }  from '../../app/app';
+import * as playlistActions from '../../actions/playlist';
 
 interface State {
   searchText: string;
@@ -8,6 +10,7 @@ interface State {
 export interface PublicProps {
   editable: boolean;
   channel: string;
+  deleteSong?: Function;
 }
 export interface ReduxStateProps {
   playlist?: Song[];
@@ -26,7 +29,7 @@ export class PlaylistComponent extends React.Component<Props, State> {
   }
 
   private renderPlaylist(editable: boolean): JSX.Element[]{
-    const { playlist } = this.props;
+    const { playlist, deleteSong } = this.props;
     if (playlist === undefined) {
       return null;
     }
@@ -34,7 +37,7 @@ export class PlaylistComponent extends React.Component<Props, State> {
     return playlist.map((song: Song, index: number): JSX.Element => {
       return(
         <div key={index}>
-          {song.title} - {song.artist}, {song.genre}, {song.game} {editable && <button>Delete</button>}
+          {song.title} - {song.artist}, {song.genre}, {song.game} {(editable) && <button onClick={() => this.props.deleteSong(song)}>Delete</button>}
         </div>
       );
     });
