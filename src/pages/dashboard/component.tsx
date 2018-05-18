@@ -5,6 +5,8 @@ import { Header } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 import { Playlist } from '../../components/playlist/container';
+import { app } from '../../app/app';
+import * as playlistActions from '../../actions/playlist';
 
 interface State {}
 export interface PublicProps {}
@@ -23,7 +25,7 @@ export class DashboardPageComponent extends React.Component<Props, State> {
       <div>
         Manage Playlist
         <div>
-          <button onClick={() => {this.skipSong()}}>Skip Song</button>
+          <button onClick={(event: React.MouseEvent<HTMLElement>) => { this.skipSong(session.token)}}>lol Skip Song</button>
         </div>
         <Playlist
           editable={true}
@@ -31,7 +33,8 @@ export class DashboardPageComponent extends React.Component<Props, State> {
       </div>
     );
   }
-  private skipSong(){
-    
+
+  private skipSong(token: string){
+    app.store.dispatch(playlistActions.skipSong(token));
   }
 }

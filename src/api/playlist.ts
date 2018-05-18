@@ -1,6 +1,8 @@
 export class PlaylistAPI {
+  private apiRoot = 'http://localhost:3030/';
+  
   public ping(jwt: string): Promise<void> {
-    return fetch('http://localhost:3030/api/v0/ping',{
+    return fetch(this.apiRoot + 'api/v0/ping',{
       method: 'POST',
       headers: {
         'authorization': 'Bearer ' + jwt,
@@ -13,7 +15,7 @@ export class PlaylistAPI {
   }
 
   public getSonglist(jwt: string): Promise<void> {
-    return fetch('http://localhost:3030/api/v0/songlist',{
+    return fetch(this.apiRoot + 'api/v0/songlist',{
       method: 'GET',
       headers: {
         'authorization': 'Bearer ' + jwt,
@@ -26,7 +28,7 @@ export class PlaylistAPI {
   }
 
   public getPlaylist(jwt: string): Promise<void> {
-    return fetch('http://localhost:3030/api/v0/playlist',{
+    return fetch(this.apiRoot + 'api/v0/playlist',{
       method: 'GET',
       headers: {
         'authorization': 'Bearer ' + jwt,
@@ -39,12 +41,25 @@ export class PlaylistAPI {
   }
 
   public postSonglist(jwt: string, songlist: string): Promise<void> {
-    return fetch('http://localhost:3030/api/v0/songlist',{
+    return fetch(this.apiRoot + 'api/v0/songlist',{
       method: 'POST',
       headers: {
         'authorization': 'Bearer ' + jwt,
       },
       body: songlist,
+    }).then((value: Response) => {
+
+    }).catch((reason: any) => {
+      console.log(reason);
+    });
+  }
+
+  public skipSong(jwt: string): Promise<void> {
+    return fetch(this.apiRoot + 'api/v0/playlist/skip',{
+      method: 'POST',
+      headers: {
+        'authorization': 'Bearer ' + jwt,
+      }
     }).then((value: Response) => {
 
     }).catch((reason: any) => {

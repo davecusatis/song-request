@@ -28,14 +28,12 @@ export class App {
     this.store = new Store(this.config);
 
     window.Twitch.ext.onAuthorized((auth: Session) => {
-      window.Twitch.ext.rig.log('auth', auth);
       this.store.dispatch(sessionActions.onAuthorized(auth));
       this.store.dispatch(playlistActions.updatePlaylist(auth.token));
       this.store.dispatch(songlistActions.updateSonglist(auth.token));
     });
  
     window.Twitch.ext.onContext((context: any) => {
-      window.Twitch.ext.rig.log('context', context);
       this.store.dispatch(contextActions.onContext(context));
     });
 

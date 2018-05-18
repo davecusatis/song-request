@@ -18,14 +18,12 @@ type Props = PublicProps & ReduxStateProps;
 export class PlaylistComponent extends React.Component<Props, State> {
   public render() {
     const { playlist, editable, channel } = this.props;
-
     return (
       <div>
         {playlist ? this.renderPlaylist(editable) : this.renderLoading(channel)}
       </div>
     )
   }
-
 
   private renderPlaylist(editable: boolean): JSX.Element[]{
     const { playlist } = this.props;
