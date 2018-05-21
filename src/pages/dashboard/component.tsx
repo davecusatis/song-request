@@ -40,7 +40,6 @@ export class DashboardPageComponent extends React.Component<Props, State> {
   }
 
   private deleteSong(song: Song){
-    console.log('deleting song', song);
     const { session } = this.props;
     app.store.dispatch(playlistActions.deleteSong(session.token, song));
   }

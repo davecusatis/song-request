@@ -1,7 +1,10 @@
 import { Song } from '../models/song';
+import { app } from '../app/app';
+import * as songlistActions from '../actions/songlist';
 
 export class PlaylistAPI {
   private apiRoot = 'http://localhost:3030/';
+  private cloudFrontRoot = 'https://d392vuotjjcije.cloudfront.net/'
 
   public ping(jwt: string): Promise<void> {
     return fetch(this.apiRoot + 'api/v0/ping',{
@@ -17,13 +20,26 @@ export class PlaylistAPI {
   }
 
   public getSonglist(jwt: string): Promise<void> {
-    return fetch(this.apiRoot + 'api/v0/songlist',{
-      method: 'GET',
+    const payload = atob(jwt.split('.')[1]);
+    const { channel_id }   = JSON.parse(payload);
+    return fetch(this.cloudFrontRoot + channel_id + '.txt', {
       headers: {
-        'authorization': 'Bearer ' + jwt,
-      },
-    }).then((value: Response) => {
-
+        'content-type': 'text/plain',
+      }
+    })
+    .then((value: Response) =>  value.text())
+    .then((resp: string) => {
+      const rawSonglist = resp.trim().split('\n');
+      const songlist = rawSonglist.map(song => {
+        if (song) {
+          const s = song.split(' , ');
+          return {
+            title: s[1].trim(),
+            artist: s[0].trim(),
+          }
+        }
+      });
+      app.store.dispatch(songlistActions.songlistUpdated(songlist));
     }).catch((reason: any) => {
       console.log(reason);
     });
