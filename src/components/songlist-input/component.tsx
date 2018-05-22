@@ -2,46 +2,62 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
 
+
+export interface PublicProps {}
+export interface ReduxStateProps {
+  songlist?: Song[];
+}
 export interface SonglistInputProps {
   onSubmit(songlist: Song[]): void;
-  songlist?: Song[];
 }
 
 export interface SonglistInputState {
   songlistString?: string;
 }
 
-export class SonglistInput extends React.Component<SonglistInputProps, SonglistInputState>{
+type Props = SonglistInputProps & ReduxStateProps & PublicProps;
+export class SonglistInputComponent extends React.Component<Props, SonglistInputState>{
   constructor(props: SonglistInputProps) {
     super(props);
-    const s = this.songlistToString(this.props.songlist);
     this.state = {
-      songlistString: s,
+      songlistString: '',
     };
+  }
+
+  public componentWillMount() {
+    const s = this.songlistToString(this.props.songlist);
+    console.log(s);
+    this.setState({
+      songlistString: s,
+    });
   }
 
   private songlistToString(songlist: Song[]): string {
     let songlistString = ""
-    songlist.map((song: Song) => {
-      songlistString += `${song.title} , ${song.artist}\n`
-    });
+    if(songlist){
+      songlist.map((song: Song) => {
+        songlistString += `${song.title} , ${song.artist}\n`
+      });
+    }
     return songlistString;
   }
 
   private stringToSonglist(songlistString: string): Song[] {
     let songlist:Song[] = [];
-    const songs = songlistString.split('\n');
-    songs.map((song: string, index: number) => {
-      if (song) {
-        let attrs = song.split(',');
-        let title = attrs[0].trim();
-        let artist = attrs[1].trim();
-        songlist.push({
-          title: title,
-          artist: artist,
-        })
-      }
-    });
+    if(songlistString.length > 0){
+      const songs = songlistString.split('\n');
+      songs.map((song: string, index: number) => {
+        if (song) {
+          let attrs = song.split(',');
+          let title = attrs[0].trim();
+          let artist = attrs[1].trim();
+          songlist.push({
+            title: title,
+            artist: artist,
+          })
+        }
+      });
+    }
     return songlist;
   }
 

@@ -42,6 +42,7 @@ export class PlaylistAPI {
       app.store.dispatch(songlistActions.songlistUpdated(songlist));
     }).catch((reason: any) => {
       console.log(reason);
+      app.store.dispatch(songlistActions.songlistUpdated([]));
     });
   }
 

@@ -21,26 +21,16 @@ export interface ReduxStateProps {
 
 type Props = PublicProps & ReduxStateProps & RouteProps;
 export class BroadcasterConfigPageComponent extends React.Component<Props, State> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      songlist: props.songlist,
-    }
-  }
-
   public render() {
     const { session, songlist } = this.props;
     const channel = session && session.channelId;
-
     if (songlist === undefined) {
       return null;
     }
-
     return (
       <div>
         Broadcaster Config
         <SonglistInput
-          songlist={songlist}
           onSubmit={(songlist: Song[]) => {
             app.store.dispatch(songlistActions.saveSonglist(session.token, songlist));
           }} />
