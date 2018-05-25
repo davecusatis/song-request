@@ -30,12 +30,10 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
     const channel = session && session.channelId;
 
     if(context && context.mode === "config") {
-      console.log(context);
       return (<Redirect to='/config' />);
     }
 
     if(context && context.mode === "dashboard") {
-      console.log(context);
       return (<Redirect to='/dashboard' />);
     }
 

@@ -25,10 +25,8 @@ export class SonglistInputComponent extends React.Component<Props, SonglistInput
   }
 
   public componentWillMount() {
-    const s = this.songlistToString(this.props.songlist);
-    console.log(s);
     this.setState({
-      songlistString: s,
+      songlistString:this.songlistToString(this.props.songlist),
     });
   }
 
