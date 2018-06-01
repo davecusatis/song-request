@@ -49,7 +49,7 @@ export class SearchComponent extends React.Component<Props, State> {
         {songlist.map((song: Song, index: number): JSX.Element => {
           return (
             <div key={index}>
-              {song.title} - {song.artist} Add
+              {song.title} - {song.artist} <button onClick={() => { this.props.addSong(song); }}>Add</button>
             </div>);
         })}
       </div>

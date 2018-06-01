@@ -99,4 +99,18 @@ export class PlaylistAPI {
       console.log(reason);
     });
   }
+
+  public addSong(jwt: string, song: Song): Promise<void> {
+    return fetch(this.apiRoot + 'api/v0/playlist', {
+      method: 'PUT',
+      headers: {
+        'authorization': 'Bearer ' + jwt,
+      },
+      body: JSON.stringify(song),
+    }).then((value: Response) => {
+
+    }).catch((reason: any) => {
+      console.log(reason);
+    });
+  }
 }

@@ -37,16 +37,26 @@ export class PlaylistComponent extends React.Component<Props, State> {
     return playlist.map((song: Song, index: number): JSX.Element => {
       return(
         <div key={index}>
-          {song.title} - {song.artist}, {song.genre}, {song.game} {(editable) && <button onClick={() => this.props.deleteSong(song)}>Delete</button>}
+          {song.title} - {song.artist} {song.requestedBy} {(editable) && <button onClick={() => this.props.deleteSong(song)}>Delete</button>}
         </div>
       );
     });
   }
+  private renderRequestedBy(song: Song): JSX.Element {
+    if (!song.requestedBy) {
+      return null;
+    }
 
+    return (
+      <span>
+        (song.requestedBy)
+      </span>
+    );
+  }
   private renderLoading(channelId: string): JSX.Element{
     return (
       <div>
-        Loading {channelId} playlist...
+        No songs added to playlist yet.
       </div>
     );
   }

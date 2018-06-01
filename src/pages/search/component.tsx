@@ -5,6 +5,8 @@ import { Header } from '../../components/header';
 import { Context } from '../../models/context';
 import { Session } from '../../models/session';
 import { Search } from '../../components/search';
+import { app }  from '../../app/app';
+import * as playlistActions from '../../actions/playlist';
 
 interface State {
   songlist?: Song[];
@@ -46,7 +48,10 @@ export class SearchPageComponent extends React.Component<Props, State> {
 
     return (
       <Search
-        addSong={(song: Song)=> {}}/>
+        addSong={(song: Song)=> { 
+          console.log(song);
+          app.store.dispatch(playlistActions.addSong(this.props.session.token, song));
+        }}/>
     );
   }
 
