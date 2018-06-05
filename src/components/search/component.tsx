@@ -38,14 +38,13 @@ export class SearchComponent extends React.Component<Props, State> {
   }
 
 
-  private renderAddButton(song: Song): JSX.Element {
-    let isDisabled = false;
+  private isSongInPlaylist(song: Song): boolean {
     if(this.props.playlist && this.props.playlist.find((s: Song): boolean => {
       return s.title === song.title && s.artist === song.artist;
     })) {
-      isDisabled = true;
+      return true;
     }
-    return (<button disabled={isDisabled} onClick={() => { this.props.addSong(song); }}>Add</button>);
+    return false;
   }
 
   public render() {
@@ -60,7 +59,7 @@ export class SearchComponent extends React.Component<Props, State> {
         {songlist.map((song: Song, index: number): JSX.Element => {
           return (
             <div key={index}>
-              {song.title} - {song.artist} {this.renderAddButton(song)}
+              {song.title} - {song.artist} <button disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}>Add</button>
             </div>);
         })}
       </div>
