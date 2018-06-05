@@ -25,7 +25,7 @@ export class DashboardPageComponent extends React.Component<Props, State> {
       <div>
         Manage Playlist
         <div>
-          <button onClick={(event: React.MouseEvent<HTMLElement>) => { this.skipSong(session.token)}}>lol Skip Song</button>
+          <button onClick={(event: React.MouseEvent<HTMLElement>) => { this.skipSong(session.token)}}>Skip Song</button>
         </div>
         <Playlist
           editable={true}

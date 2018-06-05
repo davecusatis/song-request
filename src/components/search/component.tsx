@@ -11,6 +11,7 @@ export interface PublicProps {
 }
 export interface ReduxStateProps {
   songlist?: Song[];
+  playlist?: Song[];
 }
 
 type Props = PublicProps & ReduxStateProps;
@@ -37,6 +38,16 @@ export class SearchComponent extends React.Component<Props, State> {
   }
 
 
+  private renderAddButton(song: Song): JSX.Element {
+    let isDisabled = false;
+    if(this.props.playlist && this.props.playlist.find((s: Song): boolean => {
+      return s.title === song.title && s.artist === song.artist;
+    })) {
+      isDisabled = true;
+    }
+    return (<button disabled={isDisabled} onClick={() => { this.props.addSong(song); }}>Add</button>);
+  }
+
   public render() {
     const songlist = this.props.songlist.filter((song: Song, index: number): boolean => this.filter(song));
 
@@ -49,7 +60,7 @@ export class SearchComponent extends React.Component<Props, State> {
         {songlist.map((song: Song, index: number): JSX.Element => {
           return (
             <div key={index}>
-              {song.title} - {song.artist} <button onClick={() => { this.props.addSong(song); }}>Add</button>
+              {song.title} - {song.artist} {this.renderAddButton(song)}
             </div>);
         })}
       </div>
