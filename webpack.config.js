@@ -8,19 +8,23 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: ['.ts', '.tsx', '.js', '.sass']
   },
   module: {
     rules: [
       { 
           test: /\.tsx?$/,
-          use: [ "ts-loader"]
+          use: [ 'ts-loader']
       },
       {
           test: /\.sass$/,
-          use: [ "style-loader"]
+          use: [
+                "style-loader", // creates style nodes from JS strings
+                "css-loader", // translates CSS into CommonJS
+                "sass-loader" // compiles Sass to CSS
+            ]
       },
     ]
   },
@@ -29,7 +33,7 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, 'public'),
     port: 8080,
     index: path.join(__dirname, 'public/index.html'),
     host: 'localhost.rig.twitch.tv',

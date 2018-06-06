@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Song } from '../../models/song';
+import './component.sass';
 
 interface State {
   searchText: string;
