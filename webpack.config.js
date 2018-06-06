@@ -18,6 +18,10 @@ module.exports = {
           test: /\.tsx?$/,
           use: [ "ts-loader"]
       },
+      {
+          test: /\.sass$/,
+          use: [ "style-loader"]
+      },
     ]
   },
   externals: {

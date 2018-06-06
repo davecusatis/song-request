@@ -24,6 +24,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
+    "style-loader": "^0.21.0",
     "ts-loader": "^4.2.0",
     "webpack": "^4.6.0",
     "webpack-livereload-plugin": "^2.1.1"
