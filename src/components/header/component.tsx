@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
+import './component.sass';
 
 export interface PublicProps {}
 export interface HeaderState {
@@ -23,12 +24,14 @@ export class HeaderComponent extends React.Component<Props, HeaderState>{
 
   public render() {
     return (
-      <div>
-        Song Request
-        {this.renderNowPlaying()}
-          <div>
-            <Link to="/playlist"> Playlist </Link>
-            <Link to="/songlist"> Songlist </Link>
+      <div className='header_container'>
+        <div className='header_title_container'>
+          <div className='header_title'>Song Request</div>
+          {this.renderNowPlaying()}
+        </div>
+          <div className='header-tabs_container'>
+            <Link className='header-tab' to="/playlist">Playlist</Link>
+            <Link className='header-tab' to="/songlist">Songlist</Link>
           </div>
       </div>
     );
@@ -38,8 +41,8 @@ export class HeaderComponent extends React.Component<Props, HeaderState>{
     const { playlist } = this.props;
     if(playlist && playlist.length > 0){
       return (
-        <div>
-          Now playing: {playlist[0].title}
+        <div className='header-now-playing'>
+          NOW PLAYING: {playlist[0].title}
         </div>
       );
     }

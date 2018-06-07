@@ -60,7 +60,7 @@ export class SearchComponent extends React.Component<Props, State> {
         <div className='songlist-container'>
           {songlist.map((song: Song, index: number): JSX.Element => {
             return (
-              <div key={index}>
+              <div className='songlist-item' key={index}>
                 {song.title} - {song.artist} <button disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}>Add</button>
               </div>);
           })}
