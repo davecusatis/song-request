@@ -52,16 +52,17 @@ export class SearchComponent extends React.Component<Props, State> {
     const songlist = this.props.songlist.filter((song: Song, index: number): boolean => this.filter(song));
 
     return (
-      <div>
-        Search
+      <div className='search-container'>
         <input
+          className='search-input'
           value={this.state.searchText}
+          placeholder='Search'
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.onChange(event)} />
         <div className='songlist-container'>
           {songlist.map((song: Song, index: number): JSX.Element => {
             return (
               <div className='songlist-item' key={index}>
-                {song.title} - {song.artist} <button disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}>Add</button>
+                <div className='songlist-item_name'>{song.title} - {song.artist}</div> <button className='songlist-item_button' disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}>Add</button>
               </div>);
           })}
         </div>
