@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Song } from '../../models/song';
 import { app }  from '../../app/app';
 import * as playlistActions from '../../actions/playlist';
+import './component.sass';
 
 interface State {
   searchText: string;
@@ -22,7 +23,7 @@ export class PlaylistComponent extends React.Component<Props, State> {
   public render() {
     const { playlist, editable, channel } = this.props;
     return (
-      <div>
+      <div className='playlist-container'>
         {playlist ? this.renderPlaylist(editable) : this.renderLoading(channel)}
       </div>
     )
@@ -36,22 +37,14 @@ export class PlaylistComponent extends React.Component<Props, State> {
 
     return playlist.map((song: Song, index: number): JSX.Element => {
       return(
-        <div key={index}>
-          {song.title} - {song.artist} {song.requestedBy} {(editable) && <button onClick={() => this.props.deleteSong(song)}>Delete</button>}
+        <div className='playlist-item' key={index}>
+          <div className='playlist-item_name'>
+            {song.title} - {song.artist} {song.requestedBy}
+          </div>
+          {(editable) && <button className='songlist-item_button' onClick={() => this.props.deleteSong(song)}>Delete</button>}
         </div>
       );
     });
-  }
-  private renderRequestedBy(song: Song): JSX.Element {
-    if (!song.requestedBy) {
-      return null;
-    }
-
-    return (
-      <span>
-        (song.requestedBy)
-      </span>
-    );
   }
   private renderLoading(channelId: string): JSX.Element{
     return (

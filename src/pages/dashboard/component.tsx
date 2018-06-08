@@ -22,7 +22,7 @@ export class DashboardPageComponent extends React.Component<Props, State> {
     const channel = session && session.channelId;
 
     return (
-      <div>
+      <div className='dashboard-config-container'>
         Manage Playlist
         <div>
           <button onClick={(event: React.MouseEvent<HTMLElement>) => { this.skipSong(session.token)}}>Skip Song</button>
