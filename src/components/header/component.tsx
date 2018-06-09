@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
-import './component.sass';
+import './component.scss';
 
 export interface PublicProps {}
 export interface HeaderState {
