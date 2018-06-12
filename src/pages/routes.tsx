@@ -36,7 +36,7 @@ const routes: RouteEntry[] = [
     component: BroadcasterConfigPage,
   },
   {
-    index: 3,
+    index: 4,
     title: 'Live Config',
     path: '/dashboard',
     exact: true,

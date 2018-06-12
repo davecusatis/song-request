@@ -34,7 +34,7 @@ export class SearchPageComponent extends React.Component<Props, State> {
 
     return (
       <div>
-        <Header/>
+        <Header page='songlist'/>
         {this.state.songlist ? this.renderSonglist() : this.renderLoading(channel)}
       </div>
     );

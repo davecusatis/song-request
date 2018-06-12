@@ -3,9 +3,15 @@ import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
 import './component.scss';
 
-export interface PublicProps {}
+const PLAYLIST = 'playlist';
+const SONGLIST = 'songlist';
+
+export interface PublicProps {
+  page: string;
+}
 export interface HeaderState {
   nowPlaying: Song;
+  selected: string;
 }
 
 export interface ReduxStateProps {
@@ -16,12 +22,19 @@ type Props = ReduxStateProps & PublicProps;
 
 export class HeaderComponent extends React.Component<Props, HeaderState>{
   constructor(props: PublicProps) {
+    console.log(props);
     super(props);
     this.state = {
       nowPlaying: null,
+      selected: PLAYLIST
     };
   }
 
+  private onClick(selection: string):void {
+    this.setState({
+      selected: selection,
+    })
+  }
   public render() {
     return (
       <div className='header_container'>
@@ -30,8 +43,14 @@ export class HeaderComponent extends React.Component<Props, HeaderState>{
           {this.renderNowPlaying()}
         </div>
           <div className='header-tabs_container'>
-            <Link className='header-tab' to="/playlist">Playlist</Link>
-            <Link className='header-tab' to="/songlist">Songlist</Link>
+            <div>
+              <Link onClick={() => { this.onClick(PLAYLIST) }} className='header-tab' to="/playlist">Playlist</Link>
+              {this.props.page === PLAYLIST && <div className='header-tab_selected'/>}
+            </div>
+            <div>
+              <Link onClick={() => { this.onClick(SONGLIST) }} className='header-tab' to="/songlist">Songlist</Link>
+              {this.props.page === SONGLIST && <div className='header-tab_selected'/>}
+            </div>
           </div>
       </div>
     );

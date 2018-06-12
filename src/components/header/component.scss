@@ -14,12 +14,13 @@
 }
 
 .header-tabs_container{
+  display: flex;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .header-tab {
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
   padding-top: 10px;
   padding-bottom: 5px;
   padding-left: 15px;
@@ -33,4 +34,12 @@
 .header-now-playing {
   font-size: 12px;
   font-weight: lighter;
+}
+
+.header-tab_selected {
+  border-bottom: 3px solid blue;
+  width: 40%;
+  margin-left: auto;
+  border-radius: 25%;
+  margin-right: auto;
 }

@@ -39,7 +39,7 @@ export class PlaylistPageComponent extends React.Component<Props, State> {
 
     return (
       <div>
-        <Header/>
+        <Header page='playlist'/>
         <Playlist
           editable={false}
           channel={channel}/>
