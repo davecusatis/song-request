@@ -1,5 +1,4 @@
 body {
-    font-family: 'PT Sans', sans-serif;
-    background: rgba(44,47,51, 0.4);
-    color: lightgrey;
+    margin: 0;
+    padding: 0;
 }

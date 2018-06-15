@@ -1,22 +1,36 @@
 .collapser {
     position: absolute;
+    cursor: pointer;
+    transform: rotate(180deg);
+    transition: transform 1s ease;
 }
 
 .app-root {
-    width: 100%;
+    height: 15px;
+    width: 15px;
+    float: right;
     transition: width 1s ease;
+    font-family: 'PT Sans', sans-serif;
+    background: rgba(44,47,51, 0.8);
+    color: lightgrey;    
 }
 
-.collapser.open::after {
-    content: '>';
-    transform: rotate(180);
+.collapser.open {
+    transform: rotate(0deg);
 }
 
-.collapser.closed::after {
-    content: '>';
-    transform: rotate(180);
+.app-root.open {
+    width: 100%;
+    height: 640px;
 }
 
-.closed {
-    width: 10px;
+.app-root-container{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s ease, visibility 1s linear;
+}
+
+.app-root-container.open {
+    visibility: visible;
+    opacity: 1;
 }

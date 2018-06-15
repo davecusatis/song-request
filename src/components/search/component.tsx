@@ -62,7 +62,7 @@ export class SearchComponent extends React.Component<Props, State> {
           {songlist.map((song: Song, index: number): JSX.Element => {
             return (
               <div className='songlist-item' key={index}>
-                <div className='songlist-item_name'>{song.title} - {song.artist}</div> <button className='songlist-item_button' disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}>Add</button>
+                <div className='songlist-item_name'>{song.title} - {song.artist}</div> <button className='songlist-item_button' disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}><span className='plus'>+</span></button>
               </div>);
           })}
         </div>

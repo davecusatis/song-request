@@ -39,7 +39,7 @@ export class PlaylistComponent extends React.Component<Props, State> {
       return(
         <div className='playlist-item' key={index}>
           <div className='playlist-item_name'>
-            {song.title} - {song.artist} {song.requestedBy}
+            {song.title} - {song.artist} <span className='playlist-item_requested-by'>{song.requestedBy}</span>
           </div>
           {(editable) && <button className='songlist-item_button' onClick={() => this.props.deleteSong(song)}>Delete</button>}
         </div>

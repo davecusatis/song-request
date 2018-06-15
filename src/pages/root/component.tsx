@@ -26,18 +26,27 @@ export class RootComponent extends React.Component<Props, State> {
     });
   }
   public render() {
-    const rootClass = classNames({
+    const rootClasses = classNames({
       'app-root': true,
-      'open': this.state.open,
-      'closed': !this.state.open,
+      'open': this.state.open
     });
-    console.log(rootClass);
+
+    const collapserClasses = classNames({
+      'collapser': true,
+      'open': this.state.open,
+    });
+    const rootContainerClasses = classNames({
+      'app-root-container': true,
+      'open': this.state.open,
+    })
     return (
-      <div className={rootClass}>
-        <div onClick={() => this.toggleOpen() } className='collapser open' />
-        <Switch>
-          {renderRoutes()}
-        </Switch>
+      <div className={rootClasses}>
+        <div onClick={() => this.toggleOpen() } className={collapserClasses}>></div>
+        <div className={rootContainerClasses}>
+          <Switch>
+            {renderRoutes()}
+          </Switch>
+        </div>
       </div>
     );
   }
