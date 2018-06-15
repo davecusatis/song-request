@@ -1,0 +1,22 @@
+.collapser {
+    position: absolute;
+}
+
+.app-root {
+    width: 100%;
+    transition: width 1s ease;
+}
+
+.collapser.open::after {
+    content: '>';
+    transform: rotate(180);
+}
+
+.collapser.closed::after {
+    content: '>';
+    transform: rotate(180);
+}
+
+.closed {
+    width: 10px;
+}

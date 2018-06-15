@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Song } from '../../models/song';
 import './component.scss';
@@ -36,6 +37,14 @@ export class HeaderComponent extends React.Component<Props, HeaderState>{
     })
   }
   public render() {
+    const playlistClasses = classNames({
+      'header-tab': true,
+      'selected': this.props.page === PLAYLIST,
+    });
+    const songlistClasses = classNames({
+      'header-tab': true,
+      'selected': this.props.page === SONGLIST,
+    });
     return (
       <div className='header_container'>
         <div className='header_title_container'>
@@ -44,11 +53,11 @@ export class HeaderComponent extends React.Component<Props, HeaderState>{
         </div>
           <div className='header-tabs_container'>
             <div>
-              <Link onClick={() => { this.onClick(PLAYLIST) }} className='header-tab' to="/playlist">Playlist</Link>
+              <Link onClick={() => { this.onClick(PLAYLIST) }} className={playlistClasses} to="/playlist">Playlist</Link>
               {this.props.page === PLAYLIST && <div className='header-tab_selected'/>}
             </div>
             <div>
-              <Link onClick={() => { this.onClick(SONGLIST) }} className='header-tab' to="/songlist">Songlist</Link>
+              <Link onClick={() => { this.onClick(SONGLIST) }} className={songlistClasses} to="/songlist">Songlist</Link>
               {this.props.page === SONGLIST && <div className='header-tab_selected'/>}
             </div>
           </div>
