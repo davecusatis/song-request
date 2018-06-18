@@ -17,15 +17,40 @@
   width: 90%
 
 .songlist-item_button
+  cursor: pointer
   height: 20px
   border-radius: 2px
+  margin-top: auto
+  margin-bottom: auto
+  border: 0px
+  background: rgb(85,173,122)
+
+
+.songlist-item_button::hover
+  height: 23px
 
 .plus
   margin: auto
   width: 20px
+  color: white
+
+.search-input-container
+  width: 100%
+  padding-top: 10px
+  padding-bottom: 10px
+  border-bottom: 1px solid #424549
+  text-align: center
 
 .search-input
-  width: 100%
+  border: 2px solid darkgrey
+  border-radius: 2px
+  margin-left: auto
+  margin-right: auto
+  width: 95%
   height: 24px
-  margin: 10px auto 10px auto
-  border-bottom: 1px solid #424549
+  color: lightgrey
+  background: rgba(44,47,51, 0.8)
+
+.search-input:focus
+  border: 2px solid rgb(85,173,122)
+  // background: darkgrey

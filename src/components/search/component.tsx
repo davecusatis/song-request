@@ -53,11 +53,13 @@ export class SearchComponent extends React.Component<Props, State> {
 
     return (
       <div className='search-container'>
-        <input
-          className='search-input'
-          value={this.state.searchText}
-          placeholder='Search'
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.onChange(event)} />
+        <div className='search-input-container'>
+          <input
+            className='search-input'
+            value={this.state.searchText}
+            placeholder='Search'
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.onChange(event)} />
+        </div>
         <div className='songlist-container'>
           {songlist.map((song: Song, index: number): JSX.Element => {
             return (
