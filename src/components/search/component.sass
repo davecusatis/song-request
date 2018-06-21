@@ -25,6 +25,8 @@
   border: 0px
   background: rgb(85,173,122)
 
+.songlist-item_button:disabled
+  background: darkgrey
 
 .songlist-item_button::hover
   height: 23px
@@ -53,4 +55,17 @@
 
 .search-input:focus
   border: 2px solid rgb(85,173,122)
-  // background: darkgrey
+
+::-webkit-scrollbar
+  width: 10px
+
+::-webkit-scrollbar-track
+  box-shadow: inset 0 0 5px grey
+  border-radius: 10px
+
+::-webkit-scrollbar-thumb
+  background: rgb(85,173,122)
+  border-radius: 10px
+
+::-webkit-scrollbar-thumb:hover
+  background: rgb(22, 158, 81)
