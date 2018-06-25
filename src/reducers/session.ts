@@ -28,3 +28,11 @@ export function getSession(state: GlobalState): Session {
   return state.session && state.session.session;
 }
 
+export function isLinkedAccount(state: GlobalState): boolean {
+  if(!(state.session && state.session.session)) {
+    return false;
+  }
+
+  const tokenPayload = JSON.parse(atob(state.session.session.token.split('.')[1]));
+  return 'user_id' in tokenPayload;
+}

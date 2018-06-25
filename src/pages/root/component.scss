@@ -7,13 +7,13 @@
 }
 
 .app-root {
-    height: 15px;
-    width: 15px;
+    height: 100vh;
+    width: 10px;
     float: right;
     transition: width 1s ease;
     font-family: 'PT Sans', sans-serif;
     background: rgba(44,47,51, 0.8);
-    color: lightgrey;    
+    color: lightgrey;
 }
 
 .collapser.open {
@@ -22,7 +22,7 @@
 
 .app-root.open {
     width: 100%;
-    height: 640px;
+    height: 100vh;
 }
 
 .app-root-container{
@@ -34,4 +34,10 @@
 .app-root-container.open {
     visibility: visible;
     opacity: 1;
+}
+
+.link-dialog {
+    border: 1px solid #424549;
+    padding: 10%;
+    margin: 10%;
 }

@@ -28,7 +28,6 @@ export type All = (
 );
 
 export function playlistUpdated(playlist: Song[]): PlaylistUpdated {
-  console.log(playlist);
   return {
     type: PLAYLIST_UPDATED,
     playlist
