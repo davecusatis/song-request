@@ -2,10 +2,12 @@ import { Song } from '../models/song';
 import { app } from '../app/app';
 import * as songlistActions from '../actions/songlist';
 
-export class PlaylistAPI {
-  private apiRoot = 'http://localhost:3030/';
-  private cloudFrontRoot = 'https://d392vuotjjcije.cloudfront.net/'
+const prod = true;
 
+export class PlaylistAPI {
+  private apiRoot = prod ? 'http://ec2-54-185-1-131.us-west-2.compute.amazonaws.com' : 'http://localhost:3030/';
+  private cloudFrontRoot = 'https://d392vuotjjcije.cloudfront.net/';
+  // private testings3Root = 'https://s3-us-west-2.amazonaws.com/song-request-distro/'
   public ping(jwt: string): Promise<void> {
     return fetch(this.apiRoot + 'api/v0/ping',{
       method: 'POST',
