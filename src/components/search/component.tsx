@@ -17,8 +17,10 @@ export interface ReduxStateProps {
 
 type Props = PublicProps & ReduxStateProps;
 export class SearchComponent extends React.Component<Props, State> {
-  constructor(props: Props){
+  private btn: React.RefObject<HTMLButtonElement>;
+  constructor(props: Props) {
     super(props);
+    this.btn = React.createRef();
     this.state = {
       searchText: '',
     }
@@ -30,17 +32,17 @@ export class SearchComponent extends React.Component<Props, State> {
     });
   }
 
-  private filter(song: Song): boolean{
+  private filter(song: Song): boolean {
     if (this.state.searchText === '') {
       return true;
     }
     return song.title.toLowerCase().includes(this.state.searchText.toLowerCase())
-    || song.artist.toLowerCase().includes(this.state.searchText.toLowerCase());
+      || song.artist.toLowerCase().includes(this.state.searchText.toLowerCase());
   }
 
 
   private isSongInPlaylist(song: Song): boolean {
-    if(this.props.playlist && this.props.playlist.find((s: Song): boolean => {
+    if (this.props.playlist && this.props.playlist.find((s: Song): boolean => {
       return s.title === song.title && s.artist === song.artist;
     })) {
       return true;
@@ -64,7 +66,14 @@ export class SearchComponent extends React.Component<Props, State> {
           {songlist.map((song: Song, index: number): JSX.Element => {
             return (
               <div className='songlist-item' key={index}>
-                <div className='songlist-item_name'>{song.title} - {song.artist}</div> <button className='songlist-item_button' disabled={this.isSongInPlaylist(song)} onClick={() => { this.props.addSong(song); }}><span className='plus'>+</span></button>
+                <div className='songlist-item_name'>{song.title} - {song.artist}</div>
+                <button
+                  ref={this.btn}
+                  className='songlist-item_button'
+                  disabled={this.isSongInPlaylist(song)}
+                  onClick={() => { this.props.addSong(song); this.btn.current.setAttribute('disabled', 'disabled') }}>
+                  <span className='plus'>+</span>
+                </button>
               </div>);
           })}
         </div>
