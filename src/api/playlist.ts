@@ -5,7 +5,7 @@ import * as songlistActions from '../actions/songlist';
 const prod = true;
 
 export class PlaylistAPI {
-  private apiRoot = prod ? 'http://ec2-54-185-1-131.us-west-2.compute.amazonaws.com' : 'http://localhost:3030/';
+  private apiRoot = prod ? 'https://sr.dotstarmoney.com:3030/' : 'http://localhost:3030/';
   private cloudFrontRoot = 'https://d392vuotjjcije.cloudfront.net/';
   // private testings3Root = 'https://s3-us-west-2.amazonaws.com/song-request-distro/'
   public ping(jwt: string): Promise<void> {
